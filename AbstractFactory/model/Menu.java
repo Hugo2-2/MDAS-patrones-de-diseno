@@ -12,7 +12,7 @@ public abstract class Menu {
         return platos;
     }
 
-    public void setPlatos(Plato plato) {
+    public void asignarPlato(Plato plato) {
         if(platos.size() < 3){
             platos.add(plato);
         }

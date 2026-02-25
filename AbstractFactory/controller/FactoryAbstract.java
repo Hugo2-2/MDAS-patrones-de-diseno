@@ -1,6 +1,6 @@
-package Bloque1.AbstractFactory.controller;
+package AbstractFactory.controller;
 
-import Bloque1.AbstractFactory.model.Menu;
+import AbstractFactory.model.Menu;
 
 public abstract class FactoryAbstract {
     public abstract Menu crearMenuSemanal();
