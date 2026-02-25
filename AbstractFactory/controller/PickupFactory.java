@@ -7,10 +7,9 @@ import Bloque1.AbstractFactory.controller.FactoryAbstract;
 public class PickupFactory extends FactoryAbstract {
 
     @Override
-    public Menu crearMenuSemanal(Plato entrante, Plato principal, Acompanamiento acompanamiento) {
+    public Menu crearMenuSemanal(Plato entrante, Plato principal, Plato postre,  Acompanamiento acompanamiento) {
         Menu menu = new MenuSemanal();
 
-        
         entrante.setPrecio(entrante.getPrecio() * 1.02f);
         principal.setPrecio(principal.getPrecio() * 1.02f);
         principal.setAcompanamiento(acompanamiento);
