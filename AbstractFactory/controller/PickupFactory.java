@@ -11,8 +11,8 @@ public class PickupFactory extends FactoryAbstract {
         Menu menu = new MenuSemanal();
 
         
-        entrante.asignarPrecio(entrante.getPrecio() * 1.02f);
-        principal.asignarPrecio(principal.getPrecio() * 1.02f);
+        entrante.setPrecio(entrante.getPrecio() * 1.02f);
+        principal.setPrecio(principal.getPrecio() * 1.02f);
         principal.setAcompanamiento(acompanamiento);
 
         menu.asignarPlato(entrante);
@@ -26,7 +26,7 @@ public class PickupFactory extends FactoryAbstract {
         Menu menu = new MenuTemporada();
 
         
-        primero.asignarPrecio(primero.getPrecio() * 1.02f);
+        primero.setPrecio(primero.getPrecio() * 1.02f);
 
         menu.asignarPlato(primero);
 
