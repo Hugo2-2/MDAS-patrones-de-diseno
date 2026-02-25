@@ -1,7 +1,6 @@
 package AbstractFactory.controller;
 
 import AbstractFactory.model.*;
-import Bloque1.AbstractFactory.controller.FactoryAbstract;
 
 public class RestauranteFactory extends FactoryAbstract {
     
