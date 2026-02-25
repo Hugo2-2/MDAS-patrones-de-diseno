@@ -1,32 +1,32 @@
 package AbstractFactory.controller;
 
 import AbstractFactory.model.*;
+import Bloque1.AbstractFactory.controller.FactoryAbstract;
 
 
 public class PickupFactory extends FactoryAbstract {
 
     @Override
-    public Menu crearMenuSemanal() {
+    public Menu crearMenuSemanal(Plato entrante, Plato principal, Acompanamiento acompanamiento) {
         Menu menu = new MenuSemanal();
 
-        Plato primero = new Plato("Primero para llevar", TipoPlato.PRIMERO, Acompanamiento.ENSALADA);
-        primero.asignarPrecio(8.0f * INCREMENTO);
+        
+        entrante.asignarPrecio(entrante.getPrecio() * 1.02f);
+        principal.asignarPrecio(principal.getPrecio() * 1.02f);
+        principal.setAcompanamiento(acompanamiento);
 
-        Plato segundo = new Plato("Segundo para llevar", TipoPlato.SEGUNDO, Acompanamiento.PATATAS);
-        segundo.asignarPrecio(10.0f * INCREMENTO);
-
-        menu.asignarPlato(primero);
-        menu.asignarPlato(segundo);
+        menu.asignarPlato(entrante);
+        menu.asignarPlato(principal);
 
         return menu;
     }
 
     @Override
-    public Menu crearMenuTemporada() {
+    public Menu crearMenuTemporada(Plato primero) {
         Menu menu = new MenuTemporada();
 
-        Plato primero = new Plato("Plato temporada para llevar", TipoPlato.PRIMERO, Acompanamiento.VERDURAS);
-        primero.asignarPrecio(12.0f * INCREMENTO);
+        
+        primero.asignarPrecio(primero.getPrecio() * 1.02f);
 
         menu.asignarPlato(primero);
 
