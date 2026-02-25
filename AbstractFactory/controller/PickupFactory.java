@@ -1,7 +1,7 @@
 package AbstractFactory.controller;
 
 import AbstractFactory.model.*;
-import Bloque1.AbstractFactory.controller.FactoryAbstract;
+import AbstractFactory.controller.FactoryAbstract;
 
 
 public class PickupFactory extends FactoryAbstract {

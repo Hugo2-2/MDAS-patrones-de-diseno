@@ -1,5 +1,6 @@
 package AbstractFactory.controller;
 
+import AbstractFactory.model.Acompanamiento;
 import AbstractFactory.model.Menu;
 import AbstractFactory.model.Plato;
 
