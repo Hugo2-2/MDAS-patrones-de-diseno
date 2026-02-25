@@ -6,9 +6,10 @@ public class Plato {
     private TipoPlato tipo;
     private Acompanamiento acompanamiento;
 
-    public Plato(String nombre, TipoPlato tipo, Acompanamiento acompanamiento) {
+    public Plato(String nombre, TipoPlato tipo, float precio, Acompanamiento acompanamiento) {
         this.nombre = nombre;
         this.tipo = tipo;
+        this.precio = precio;
         this.acompanamiento = acompanamiento;
     }
 

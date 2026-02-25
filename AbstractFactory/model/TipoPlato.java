@@ -1,7 +1,7 @@
 package AbstractFactory.model;
 
 public enum TipoPlato {
-    PRIMERO,
-    SEGUNDO,
+    ENTRANTE,
+    PRINCIPAL,
     POSTRE
 }

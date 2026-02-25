@@ -1,21 +1,22 @@
 package AbstractFactory.controller;
 
 import AbstractFactory.model.*;
+import Bloque1.AbstractFactory.controller.FactoryAbstract;
 
 public class RestauranteFactory extends FactoryAbstract {
     
     @Override
-    public Menu crearMenuSemanal() {
+    public Menu crearMenuSemanal(Acompanamiento acompanamiento) {
         Menu menu = new MenuSemanal();
 
-        Plato primero = new Plato("Primero", TipoPlato.PRIMERO, Acompanamiento.ENSALADA);
-        primero.asignarPrecio(8.0f);
+        Plato primero = new Plato("Primero", TipoPlato.ENTRANTE, 8.0f, Acompanamiento.NINGUNO);
+        
 
-        Plato segundo = new Plato("Segundo", TipoPlato.SEGUNDO, Acompanamiento.PATATAS);
-        segundo.asignarPrecio(10.0f);
+        Plato segundo = new Plato("Segundo", TipoPlato.PRINCIPAL, 10.0f, Acompanamiento.NINGUNO);
+        
 
-        Plato postre = new Plato("Postre", TipoPlato.POSTRE, Acompanamiento.NINGUNO);
-        postre.asignarPrecio(3.0f);
+        Plato postre = new Plato("Postre", TipoPlato.POSTRE,  3.0f, Acompanamiento.NINGUNO);
+
 
         menu.asignarPlato(primero);
         menu.asignarPlato(segundo);
@@ -25,17 +26,17 @@ public class RestauranteFactory extends FactoryAbstract {
     }
 
     @Override
-    public Menu crearMenuTemporada() {
+    public Menu crearMenuTemporada(Acompanamiento acompanamiento) {
         Menu menu = new MenuTemporada();
 
-        Plato primero = new Plato("Primero", TipoPlato.PRIMERO, Acompanamiento.ENSALADA);
-        primero.asignarPrecio(8.0f);
+        Plato primero = new Plato("Primero", TipoPlato.ENTRANTE, 8.0f, Acompanamiento.NINGUNO); 
+    
 
-        Plato segundo = new Plato("Segundo", TipoPlato.SEGUNDO, Acompanamiento.PATATAS);
-        segundo.asignarPrecio(10.0f);
+        Plato segundo = new Plato("Segundo", TipoPlato.PRINCIPAL, 10.0f , acompanamiento);
+    
 
-        Plato postre = new Plato("Postre", TipoPlato.POSTRE, Acompanamiento.NINGUNO);
-        postre.asignarPrecio(3.0f);
+        Plato postre = new Plato("Postre", TipoPlato.POSTRE, 3.0f , Acompanamiento.NINGUNO);
+
 
         menu.asignarPlato(primero);
         menu.asignarPlato(segundo);
