@@ -1,8 +1,6 @@
 package AbstractFactory.controller;
 
 import AbstractFactory.model.*;
-import AbstractFactory.controller.FactoryAbstract;
-
 
 public class PickupFactory extends FactoryAbstract {
 
