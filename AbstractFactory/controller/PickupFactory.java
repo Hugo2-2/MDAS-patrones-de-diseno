@@ -5,11 +5,12 @@ import AbstractFactory.model.*;
 public class PickupFactory extends FactoryAbstract {
 
     @Override
-    public Menu crearMenuSemanal(Plato entrante, Plato principal, Plato postre,  Acompanamiento acompanamiento) {
+    public Menu crearMenuSemanal(Acompanamiento acompanamiento) {
         Menu menu = new MenuSemanal();
 
-        entrante.setPrecio(entrante.getPrecio() * 1.02f);
-        principal.setPrecio(principal.getPrecio() * 1.02f);
+        Plato entrante = new Plato("Ensalada César", TipoPlato.ENTRANTE, 5.0f);
+        Plato principal = new Plato("Entrecot", TipoPlato.PRINCIPAL, 15.0f);
+
         principal.setAcompanamiento(acompanamiento);
 
         menu.asignarPlato(entrante);
@@ -19,13 +20,14 @@ public class PickupFactory extends FactoryAbstract {
     }
 
     @Override
-    public Menu crearMenuTemporada(Plato primero) {
+    public Menu crearMenuTemporada() {
         Menu menu = new MenuTemporada();
 
-        
-        primero.setPrecio(primero.getPrecio() * 1.02f);
+        Plato temporada = new Plato("Guiso especial de invierno", TipoPlato.PRINCIPAL, 12.0f);
 
-        menu.asignarPlato(primero);
+        temporada.setPrecio(temporada.getPrecio() * 1.02f);
+
+        menu.asignarPlato(temporada);
 
         return menu;
     }

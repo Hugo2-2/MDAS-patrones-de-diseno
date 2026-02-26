@@ -5,8 +5,12 @@ import AbstractFactory.model.*;
 public class RestauranteFactory extends FactoryAbstract {
     
     @Override
-    public Menu crearMenuSemanal(Plato entrante, Plato principal, Plato postre, Acompanamiento acompanamiento) {
+    public Menu crearMenuSemanal(Acompanamiento acompanamiento) {
         Menu menu = new MenuSemanal();
+
+        Plato entrante = new Plato("Ensalada César", TipoPlato.ENTRANTE, 5.0f);
+        Plato principal = new Plato("Entrecot", TipoPlato.PRINCIPAL, 15.0f);
+        Plato postre = new Plato("Tarta de Queso", TipoPlato.POSTRE, 4.0f);
 
         principal.setAcompanamiento(acompanamiento);
 
@@ -18,10 +22,12 @@ public class RestauranteFactory extends FactoryAbstract {
     }
 
     @Override
-    public Menu crearMenuTemporada(Plato primero) {
+    public Menu crearMenuTemporada() {
         Menu menu = new MenuTemporada();
 
-        menu.asignarPlato(primero);
+        Plato temporada = new Plato("Guiso especial de invierno", TipoPlato.PRINCIPAL, 12.0f);
+
+        menu.asignarPlato(temporada);
 
         return menu;
     }

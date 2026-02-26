@@ -21,11 +21,8 @@ public class Main {
         // PRUEBA 1: MENÚ SEMANAL EN RESTAURANTE
         // ==========================================
         System.out.println("=== MENÚ SEMANAL EN RESTAURANTE ===");
-        Plato entranteRest = new Plato("Ensalada César", TipoPlato.ENTRANTE, 5.0f);
-        Plato principalRest = new Plato("Entrecot", TipoPlato.PRINCIPAL, 15.0f);
-        Plato postreRest = new Plato("Tarta de Queso", TipoPlato.POSTRE, 4.0f);
 
-        Menu menuSemanalRestaurante = restauranteFactory.crearMenuSemanal(entranteRest, principalRest, postreRest, Acompanamiento.PATATAS);
+        Menu menuSemanalRestaurante = restauranteFactory.crearMenuSemanal(Acompanamiento.PATATAS);
         imprimirDetallesMenu(menuSemanalRestaurante);
 
 
@@ -33,13 +30,9 @@ public class Main {
         // PRUEBA 2: MENÚ SEMANAL PARA LLEVAR (PICKUP)
         // ==========================================
         System.out.println("\n=== MENÚ SEMANAL PARA LLEVAR (PICKUP) ===");
-        // Creamos nuevos objetos plato para que el recargo del precio no afecte a los anteriores
-        Plato entrantePick = new Plato("Sopa de Picadillo", TipoPlato.ENTRANTE, 5.0f);
-        Plato principalPick = new Plato("Pollo asado", TipoPlato.PRINCIPAL, 10.0f);
-        Plato postrePick = new Plato("Helado", TipoPlato.POSTRE, 3.0f);
 
         // Pasamos el postre (para cumplir la firma del método), pero la PickupFactory lo ignorará internamente
-        Menu menuSemanalPickup = pickupFactory.crearMenuSemanal(entrantePick, principalPick, postrePick, Acompanamiento.ENSALADA);
+        Menu menuSemanalPickup = pickupFactory.crearMenuSemanal(Acompanamiento.ENSALADA);
         imprimirDetallesMenu(menuSemanalPickup);
 
 
@@ -47,9 +40,8 @@ public class Main {
         // PRUEBA 3: MENÚ DE TEMPORADA EN RESTAURANTE
         // ==========================================
         System.out.println("\n=== MENÚ DE TEMPORADA EN RESTAURANTE ===");
-        Plato temporadaRest = new Plato("Guiso especial de invierno", TipoPlato.PRINCIPAL, 12.0f);
 
-        Menu menuTemporadaRestaurante = restauranteFactory.crearMenuTemporada(temporadaRest);
+        Menu menuTemporadaRestaurante = restauranteFactory.crearMenuTemporada();
         imprimirDetallesMenu(menuTemporadaRestaurante);
 
 
@@ -57,9 +49,8 @@ public class Main {
         // PRUEBA 4: MENÚ DE TEMPORADA PARA LLEVAR
         // ==========================================
         System.out.println("\n=== MENÚ DE TEMPORADA PARA LLEVAR (PICKUP) ===");
-        Plato temporadaPick = new Plato("Guiso especial de invierno", TipoPlato.PRINCIPAL, 12.0f);
 
-        Menu menuTemporadaPickup = pickupFactory.crearMenuTemporada(temporadaPick);
+        Menu menuTemporadaPickup = pickupFactory.crearMenuTemporada();
         imprimirDetallesMenu(menuTemporadaPickup);
     }
 
@@ -69,7 +60,10 @@ public class Main {
     private static void imprimirDetallesMenu(Menu menu) {
         System.out.println("Platos incluidos:");
         for (Plato p : menu.getPlatos()) {
-            System.out.println(" - " + p.getNombre() + " (" + p.getTipo() + ") | Guarnición: " + p.getAcompanamiento() + " | Precio: " + String.format("%.2f", p.getPrecio()) + "€");
+            if(p.getTipo() == TipoPlato.PRINCIPAL)
+                System.out.println(" - " + p.getNombre() + " (" + p.getTipo() + ") | Guarnición: " + p.getAcompanamiento() + " | Precio: " + String.format("%.2f", p.getPrecio()) + "€");
+            else
+                System.out.println(" - " + p.getNombre() + " (" + p.getTipo() + ")" + " | Precio: " + String.format("%.2f", p.getPrecio()) + "€");
         }
         System.out.println("Precio TOTAL del menú: " + String.format("%.2f", menu.calcularPrecio()) + "€");
     }
