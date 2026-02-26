@@ -1,0 +1,31 @@
+INFORME TRIMESTRAL - EMPRESA XYZ
+=====================================
+
+RESUMEN EJECUTIVO:
+Las ventas han aumentado un 15% este trimestre.
+Los gastos operativos se redujeron un 5%.
+Beneficios netos: 2.5 millones de euros.
+
+VENTAS POR REGIONES:
+- Norte: 850.000€
+- Sur: 720.000€
+- Este: 930.000€
+- Oeste: 450.000€
+- Centro: 550.000€
+
+PRODUCTOS DESTACADOS:
+Producto A: 1.2M€
+Producto B: 980.000€
+Producto C: 750.000€
+Producto D: 570.000€
+
+PLANTILLA:
+Total empleados: 245
+Nuevas contrataciones: 12
+Bajas voluntarias: 5
+
+OBJETIVOS PRÓXIMO TRIMESTRE:
+- Expandir mercado internacional
+- Lanzar nueva línea de productos
+- Reducir costes un 10% adicional
+- Mejorar satisfacción del cliente

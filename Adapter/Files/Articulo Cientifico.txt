@@ -1,0 +1,20 @@
+TÍTULO: Estudio sobre inteligencia artificial
+AUTORES: García, M.; Pérez, J.; López, A.
+RESUMEN:
+Este estudio analiza el impacto de la IA en la sociedad actual.
+Se han realizado encuestas a 1000 personas.
+Los resultados muestran una tendencia positiva hacia la adopción.
+Sin embargo, existen preocupaciones sobre la privacidad.
+INTRODUCCIÓN:
+La inteligencia artificial está transformando el mundo.
+Desde asistentes virtuales hasta coches autónomos.
+Su presencia es cada vez más notable.
+METODOLOGÍA:
+Se utilizó un enfoque mixto cualitativo-cuantitativo.
+Las encuestas se realizaron online durante 3 meses.
+RESULTADOS:
+El 75% de los encuestados usa IA diariamente.
+El 60% confía en las decisiones de la IA.
+CONCLUSIONES:
+La IA tiene un futuro prometedor.
+Pero requiere regulación ética.
