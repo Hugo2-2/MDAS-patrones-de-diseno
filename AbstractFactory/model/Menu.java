@@ -5,16 +5,18 @@ import java.util.List;
 
 public abstract class Menu {
     protected List<Plato> platos = new ArrayList<>();
-    
-    public abstract float calcularPrecio();
+
+    public float calcularPrecio() {
+        float total = 0;
+        for (Plato plato : platos) {
+            total += plato.getPrecio();
+        }
+        return total;
+    }
 
     public List<Plato> getPlatos() {
         return platos;
     }
 
-    public void asignarPlato(Plato plato) {
-        if(platos.size() < 3){
-            platos.add(plato);
-        }
-    }
+    public abstract void asignarPlato(Plato plato);
 }

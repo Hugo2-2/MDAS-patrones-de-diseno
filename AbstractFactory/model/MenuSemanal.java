@@ -3,12 +3,10 @@ package AbstractFactory.model;
 public class MenuSemanal extends Menu {
 
     @Override
-    public float calcularPrecio() {
-        float total = 0;
-        for (Plato plato : platos) {
-            total += plato.getPrecio();
+    public void asignarPlato(Plato plato) {
+        if(platos.size() < 3){
+            platos.add(plato);
         }
-        return total;
     }
     
 }
