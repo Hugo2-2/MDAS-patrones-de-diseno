@@ -9,6 +9,18 @@ public class Space extends Consumer {
         this.children = children;
     }
 
+    public void addConsumer(Consumer consumer) {
+        children.add(consumer);
+    }
+
+    public void removeConsumer(Consumer consumer) {
+        children.remove(consumer);
+    }
+
+    public List<Consumer> getChildren() {
+        return children;
+    }
+
     @Override
     public double calcExpenses() {
         double totalExpenses = 0;
