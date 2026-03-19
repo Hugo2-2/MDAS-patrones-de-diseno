@@ -1,6 +1,8 @@
-package Bridge.model;
+package Bridge.controller;
 
 import java.util.List;
+
+import Bridge.model.Product;
 
 public interface FurnitureSupplier {
     List<Product> searchByPrice();

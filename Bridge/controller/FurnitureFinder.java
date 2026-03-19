@@ -1,8 +1,7 @@
 package Bridge.controller;
 
-import Bridge.model.FurnitureSupplier;
-import Bridge.model.Product;
 
+import Bridge.model.Product;
 import java.util.List;
 
 /**
@@ -36,12 +35,20 @@ public abstract class FurnitureFinder {
     }
 
     // ── Método plantilla: las subclases llaman a supplier para buscar ──
-    protected List<Product> getSofasFromSupplier() {
-        return supplier.findSofas();
+    protected List<Product> searchByPrice() {
+        return supplier.searchByPrice();
     }
 
-    protected List<Product> getTablesFromSupplier() {
-        return supplier.findTables();
+    protected List<Product> searchByStock() {
+        return supplier.searchByStock();
+    }
+
+    protected List<Product> searchBySeats(int seats) {
+        return supplier.searchBySeats(seats);
+    }
+
+    protected List<Product> searchByDimensions(String dimensions) {
+        return supplier.searchByDimensions(dimensions);
     }
 
     // ── Operación abstracta que cada subclase especializa ──────────────
