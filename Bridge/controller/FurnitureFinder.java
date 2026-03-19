@@ -1,56 +1,44 @@
 package Bridge.controller;
 
-
 import Bridge.model.Product;
 import java.util.List;
 
 /**
  * ABSTRACCIÓN (Bridge)
  *
- * Mantiene una referencia al IMPLEMENTADOR (FurnitureSupplier).
- * No sabe qué proveedor concreto hay detrás; simplemente le delega
- * las operaciones de búsqueda. Las subclases refinan el comportamiento
+ * Mantiene una referencia (composición) a una lista de IMPLEMENTADORES
+ * (FurnitureSupplier). No sabe qué proveedores concretos hay detrás;
+ * simplemente les delega las operaciones de búsqueda.
+ * Las subclases (SofaFinder, TableFinder) refinan el comportamiento
  * sin necesidad de conocer la implementación del proveedor.
  *
- *   FurnitureFinder ◇────────▷ FurnitureSupplier
+ *   FurnitureFinder ◆────────▷ FurnitureSupplier
  *       └─ SofaFinder               └─ SupplierA / B / C
  *       └─ TableFinder
  */
 public abstract class FurnitureFinder {
 
-    // ── EL PUENTE: referencia al implementador ──────────────────────────
-    private FurnitureSupplier supplier;
+    // ── EL PUENTE: composición con los implementadores ──────────────────
+    private List<FurnitureSupplier> suppliers;
 
-    public FurnitureFinder(FurnitureSupplier supplier) {
-        this.supplier = supplier;
+    public FurnitureFinder(List<FurnitureSupplier> suppliers) {
+        this.suppliers = suppliers;
     }
 
-    // Permite cambiar el proveedor en tiempo de ejecución (otro beneficio del Bridge)
-    public void setSupplier(FurnitureSupplier supplier) {
-        this.supplier = supplier;
+    public List<FurnitureSupplier> getSuppliers() {
+        return suppliers;
     }
 
-    public FurnitureSupplier getSupplier() {
-        return supplier;
-    }
-
-    // ── Método plantilla: las subclases llaman a supplier para buscar ──
-    protected List<Product> searchByPrice() {
-        return supplier.searchByPrice();
-    }
-
-    protected List<Product> searchByStock() {
-        return supplier.searchByStock();
-    }
-
-    protected List<Product> searchBySeats(int seats) {
-        return supplier.searchBySeats(seats);
-    }
-
-    protected List<Product> searchByDimensions(String dimensions) {
-        return supplier.searchByDimensions(dimensions);
+    public void setSuppliers(List<FurnitureSupplier> suppliers) {
+        this.suppliers = suppliers;
     }
 
     // ── Operación abstracta que cada subclase especializa ──────────────
-    public abstract List<Product> find();
+    /**
+     * Busca muebles según un criterio concreto delegando en los proveedores.
+     *
+     * @param criteria criterio de búsqueda (p.ej. "price", "stock", etc.)
+     * @return lista agregada de productos de todos los proveedores
+     */
+    public abstract List<Product> searchFurniture(String criteria);
 }
