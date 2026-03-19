@@ -1,4 +1,5 @@
 package Bridge.model;
+import Bridge.controller.FurnitureSupplier;
 
 import java.util.ArrayList;
 import java.util.Comparator;
