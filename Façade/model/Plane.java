@@ -8,6 +8,8 @@ public class Plane extends Transport {
         this.airline = airline;
     }
 
+    public String getAirline() { return airline; }
+
     @Override
     public String toString() {
         return "[PLANE - " + airline + "] " + super.toString();

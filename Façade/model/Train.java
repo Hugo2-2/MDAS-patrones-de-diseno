@@ -8,6 +8,8 @@ public class Train extends Transport {
         this.trainCompany = trainCompany;
     }
 
+    public String getTrainCompany() { return trainCompany; }
+
     @Override
     public String toString() {
         return "[TRAIN - " + trainCompany + "] " + super.toString();
