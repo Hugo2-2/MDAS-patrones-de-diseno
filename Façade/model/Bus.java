@@ -1,20 +1,20 @@
 package Façade.model;
 
-public class Train {
+public class Bus {
     private String origin;
     private String destination;
     private String StartDate;
     private String EndDate;
     private double price;
-    private String trainCompany;
+    private String busCompany; // Ej: Alsa, Socibus
 
-    public Train(String origin, String destination, String StartDate, String EndDate, double price, String trainCompany) {
+    public Bus(String origin, String destination, String StartDate, String EndDate, double price, String busCompany) {
         this.origin = origin;
         this.destination = destination;
         this.StartDate = StartDate;
         this.EndDate = EndDate;
         this.price = price;
-        this.trainCompany = trainCompany;
+        this.busCompany = busCompany;
     }
 
     public String getOrigin() { return origin; }
@@ -22,11 +22,11 @@ public class Train {
     public String getStartDate() { return StartDate; }
     public String getEndDate() { return EndDate; }
     public double getPrice() { return price; }
-    public String getTrainCompany() { return trainCompany; }
+    public String getBusCompany() { return busCompany; }
 
     @Override
     public String toString() {
-        return String.format("[TRAIN - %s] %s to %s | Date: %s to %s | Price: %.2f €",
-                trainCompany, origin, destination, StartDate, EndDate, price);
+        return String.format("[BUS - %s] %s to %s | Date: %s to %s | Price: %.2f €",
+                busCompany, origin, destination, StartDate, EndDate, price);
     }
 }
