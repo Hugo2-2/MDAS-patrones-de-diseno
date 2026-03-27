@@ -1,32 +1,32 @@
 package Façade.model;
 
-public class Apartment {
+public class Hostel {
+    private String name;
     private String address;
     private String city;
-    private int rooms;
-    private int bathrooms;
     private double pricePerNight;
+    private String roomType;
     private String availableFrom;
     private String availableTo;
     
     // Constructor
-    public Apartment(String address, String city, int rooms, int bathrooms, 
-                     double pricePerNight, String availableFrom, String availableTo) {
+    public Hostel(String name, String address, String city, double pricePerNight,
+                  String roomType, String availableFrom, String availableTo) {
+        this.name = name;
         this.address = address;
         this.city = city;
-        this.rooms = rooms;
-        this.bathrooms = bathrooms;
         this.pricePerNight = pricePerNight;
+        this.roomType = roomType;
         this.availableFrom = availableFrom;
         this.availableTo = availableTo;
     }
     
     // Getters
+    public String getName() { return name; }
     public String getAddress() { return address; }
     public String getCity() { return city; }
-    public int getRooms() { return rooms; }
-    public int getBathrooms() { return bathrooms; }
     public double getPricePerNight() { return pricePerNight; }
+    public String getRoomType() { return roomType; }
     public String getAvailableFrom() { return availableFrom; }
     public String getAvailableTo() { return availableTo; }
     
@@ -37,7 +37,7 @@ public class Apartment {
     
     @Override
     public String toString() {
-        return String.format("%s [%s] | %d rooms, %d baths | %.2f€/night | Available: %s - %s",
-                getAddress(), getCity(), getRooms(), getBathrooms(), getPricePerNight(), getAvailableFrom(), getAvailableTo());
+        return String.format("[%s] %s, %s | %s | %.2f€/night | Available: %s → %s", 
+                getName(), getAddress(), getCity(), getRoomType(), getPricePerNight(), getAvailableFrom(), getAvailableTo());
     }
 }
