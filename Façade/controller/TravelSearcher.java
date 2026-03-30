@@ -1,13 +1,15 @@
 package Façade.controller;
 
-import Façade.model.Plane;
-import Façade.model.Train;
 import Façade.model.Apartment;
 import Façade.model.Bus;
 import Façade.model.CityDatabase;
+import Façade.model.Festival;
+import Façade.model.GuidedTour;
 import Façade.model.Hostel;
 import Façade.model.Hotel;
-
+import Façade.model.Museum;
+import Façade.model.Plane;
+import Façade.model.Train;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +28,11 @@ public class TravelSearcher {
     private List<Apartment> availableApartments;
     private List<Hostel> availableHostels;
 
+    // Bases de datos de actividades
+    private List<GuidedTour> availableTours;
+    private List<Festival> availableFestivals;
+    private List<Museum> availableMuseums;
+
     public TravelSearcher() {
         // Inicializamos la base de datos de ciudades
         this.cityDatabase = new CityDatabase();
@@ -34,12 +41,21 @@ public class TravelSearcher {
         this.availableTrains = new ArrayList<>();
         this.availableBuses = new ArrayList<>();
 
+        this.availableHotels = new ArrayList<>();
+        this.availableApartments = new ArrayList<>();
+        this.availableHostels = new ArrayList<>();
+
+        this.availableTours = new ArrayList<>();
+        this.availableFestivals = new ArrayList<>();
+        this.availableMuseums = new ArrayList<>();
+
         // Cargar datos de prueba
         loadTransportData();
         loadAccommodationData();
-        }
+        loadActivitiesData();
+    }
 
-        private void loadTransportData() {
+    private void loadTransportData() {
         // Aviones
         availablePlanes.add(new Plane("Madrid", "Rome", "2026-05-10", "2026-05-15", 120.50, "Ryanair"));
         availablePlanes.add(new Plane("Málaga", "Paris", "2026-05-10", "2026-05-15", 85.00, "Vueling"));
@@ -111,6 +127,74 @@ public class TravelSearcher {
             "Habitación Privada", "2026-01-01", "2026-12-31"));
     }
 
+    private void loadActivitiesData() {
+        // ==================== VISITAS GUIADAS ====================
+
+        // Madrid
+        availableTours.add(new GuidedTour("Tour del Madrid de los Austrias", "Madrid",
+            "Recorrido histórico por el casco antiguo", 2.5, 25.00, "Español",
+            "2026-01-01", "2026-12-31"));
+        availableTours.add(new GuidedTour("Tour nocturno por Madrid", "Madrid",
+            "Descubre la ciudad iluminada de noche", 2.0, 20.00, "Español",
+            "2026-01-01", "2026-12-31"));
+
+        // Barcelona
+        availableTours.add(new GuidedTour("Ruta Gaudí", "Barcelona",
+            "Visita las obras maestras de Gaudí", 3.0, 35.00, "Español",
+            "2026-04-01", "2026-10-31"));
+
+        // Roma
+        availableTours.add(new GuidedTour("Coliseo y Foro Romano", "Rome",
+            "Tour guiado por la Roma antigua", 3.5, 40.00, "English",
+            "2026-01-01", "2026-12-31"));
+        availableTours.add(new GuidedTour("Vaticano y Capilla Sixtina", "Rome",
+            "Visita guiada sin colas al Vaticano", 3.0, 55.00, "English",
+            "2026-01-01", "2026-12-31"));
+
+        // Granada
+        availableTours.add(new GuidedTour("Tour de la Alhambra", "Granada",
+            "Recorrido completo por la Alhambra y el Generalife", 3.0, 45.00, "Español",
+            "2026-01-01", "2026-12-31"));
+
+        // ==================== FESTIVALES ====================
+
+        // Madrid
+        availableFestivals.add(new Festival("Mad Cool Festival", "Madrid",
+            "Festival de música indie y rock", "2026-07-08", "2026-07-12", 180.00, "Música"));
+
+        // Barcelona
+        availableFestivals.add(new Festival("Primavera Sound", "Barcelona",
+            "Festival de música alternativa", "2026-06-04", "2026-06-06", 195.00, "Música"));
+        availableFestivals.add(new Festival("La Mercè", "Barcelona",
+            "Fiestas mayores de Barcelona", "2026-09-20", "2026-09-24", 0.00, "Cultural"));
+
+        // Roma
+        availableFestivals.add(new Festival("Estate Romana", "Rome",
+            "Festival de cine, música y teatro al aire libre", "2026-06-01", "2026-09-30", 15.00, "Cultural"));
+
+        // ==================== MUSEOS ====================
+
+        // Madrid
+        availableMuseums.add(new Museum("Museo del Prado", "Calle de Ruiz de Alarcón 23", "Madrid",
+            15.00, "Arte clásico", "2026-01-01", "2026-12-31"));
+        availableMuseums.add(new Museum("Museo Reina Sofía", "Calle de Santa Isabel 52", "Madrid",
+            12.00, "Arte contemporáneo", "2026-01-01", "2026-12-31"));
+
+        // Barcelona
+        availableMuseums.add(new Museum("Museo Picasso", "Carrer de Montcada 15", "Barcelona",
+            12.00, "Arte", "2026-01-01", "2026-12-31"));
+
+        // Roma
+        availableMuseums.add(new Museum("Museos Vaticanos", "Viale Vaticano", "Rome",
+            17.00, "Arte y religión", "2026-01-01", "2026-12-31"));
+        availableMuseums.add(new Museum("Galería Borghese", "Piazzale Scipione Borghese 5", "Rome",
+            13.00, "Arte renacentista y barroco", "2026-01-01", "2026-12-31"));
+
+        // Granada
+        availableMuseums.add(new Museum("Museo de la Alhambra", "Palacio de Carlos V", "Granada",
+            0.00, "Arte hispanomusulmán", "2026-01-01", "2026-12-31"));
+    }
+
     // ==========================================================
     // MÉTODO PRINCIPAL (El que ve el cliente)
     // ==========================================================
@@ -132,8 +216,8 @@ public class TravelSearcher {
         // 2. Búsqueda de alojamiento
         accommodationSearch(destination, startDate, endDate);
 
-        // 3. Aquí invocaremos a activitySearch() en el futuro
-        System.out.println("\n🎭 ACTIVIDADES EN " + destination.toUpperCase() + " [Pendiente]");
+        // 3. Búsqueda de actividades
+        activitySearch(destination, startDate, endDate);
 
         System.out.println("\n=========================================================");
     }
@@ -288,6 +372,81 @@ public class TravelSearcher {
         for (Hostel hostel : availableHostels) {
             if (hostel.getCity().equalsIgnoreCase(city) && hostel.isAvailable(startDate, endDate)) {
                 results.add(hostel);
+            }
+        }
+        return results;
+    }
+
+    // ==========================================================
+    // MÉTODO DE BÚSQUEDA DE ACTIVIDADES
+    // ==========================================================
+
+    private void activitySearch(String city, String startDate, String endDate) {
+        System.out.println("\n🎭 ACTIVIDADES EN " + city.toUpperCase() + ":");
+
+        // Buscar visitas guiadas
+        System.out.println("\n  VISITAS GUIADAS:");
+        List<GuidedTour> tours = findTours(city, startDate, endDate);
+        if (tours.isEmpty()) {
+            System.out.println("   No hay visitas guiadas disponibles para estas fechas.");
+        } else {
+            for (GuidedTour t : tours) {
+                System.out.println("   " + t.toString());
+            }
+        }
+
+        // Buscar festivales
+        System.out.println("\n  FESTIVALES:");
+        List<Festival> festivals = findFestivals(city, startDate, endDate);
+        if (festivals.isEmpty()) {
+            System.out.println("   No hay festivales disponibles para estas fechas.");
+        } else {
+            for (Festival f : festivals) {
+                System.out.println("   " + f.toString());
+            }
+        }
+
+        // Buscar museos
+        System.out.println("\n  MUSEOS:");
+        List<Museum> museums = findMuseums(city, startDate, endDate);
+        if (museums.isEmpty()) {
+            System.out.println("   No hay museos disponibles para estas fechas.");
+        } else {
+            for (Museum m : museums) {
+                System.out.println("   " + m.toString());
+            }
+        }
+    }
+
+    // ==========================================================
+    // MÉTODOS PRIVADOS DE BÚSQUEDA DE ACTIVIDADES
+    // ==========================================================
+
+    private List<GuidedTour> findTours(String city, String startDate, String endDate) {
+        List<GuidedTour> results = new ArrayList<>();
+        for (GuidedTour tour : availableTours) {
+            if (tour.getCity().equalsIgnoreCase(city) && tour.isAvailable(startDate, endDate)) {
+                results.add(tour);
+            }
+        }
+        return results;
+    }
+
+    private List<Festival> findFestivals(String city, String startDate, String endDate) {
+        List<Festival> results = new ArrayList<>();
+        for (Festival festival : availableFestivals) {
+            if (festival.getCity().equalsIgnoreCase(city) && festival.isAvailable(startDate, endDate)) {
+                results.add(festival);
+            }
+        }
+        return results;
+    }
+
+    private List<Museum> findMuseums(String city, String startDate, String endDate) {
+        List<Museum> results = new ArrayList<>();
+        for (Museum museum : availableMuseums) {
+            if (museum.getCity().equalsIgnoreCase(city) && museum.isAvailable(startDate, endDate)) {
+                results.add(museum);
             }
         }
         return results;
