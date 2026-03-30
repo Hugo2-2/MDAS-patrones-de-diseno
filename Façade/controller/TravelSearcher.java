@@ -206,7 +206,7 @@ public class TravelSearcher {
 
         // Verificamos primero si las ciudades existen en nuestra base de datos
         if (!cityDatabase.cityExists(origin) || !cityDatabase.cityExists(destination)) {
-            System.out.println("⚠️ ADVERTENCIA: Una de las ciudades (o ambas) no están en nuestra base de datos.");
+            System.out.println("ADVERTENCIA: Una de las ciudades (o ambas) no están en nuestra base de datos.");
             System.out.println("Intentaremos buscar de todos modos, pero los resultados pueden ser limitados.\n");
         }
 
@@ -231,7 +231,7 @@ public class TravelSearcher {
         System.out.println("=========================================================\n");
 
         if (!cityDatabase.cityExists(origin) || !cityDatabase.cityExists(destination)) {
-            System.out.println("⚠️ ADVERTENCIA: Una de las ciudades (o ambas) no están en nuestra base de datos.");
+            System.out.println("ADVERTENCIA: Una de las ciudades (o ambas) no están en nuestra base de datos.");
             System.out.println("Intentaremos buscar de todos modos, pero los resultados pueden ser limitados.\n");
         }
 
@@ -248,7 +248,7 @@ public class TravelSearcher {
     private void transportSearch(String origin, String destination, String startDate, String endDate) {
 
         // --- BÚSQUEDA DE VUELOS ---
-        System.out.println("✈️ VUELOS DISPONIBLES:");
+        System.out.println("VUELOS DISPONIBLES:");
         //Solo buscamos si ambas ciudades tienen aeropuerto
         if (cityDatabase.hasAirport(origin) && cityDatabase.hasAirport(destination)) {
             List<Plane> flights = searchPlanes(origin, destination, startDate, endDate);
@@ -259,7 +259,7 @@ public class TravelSearcher {
         }
 
         // --- BÚSQUEDA DE TRENES ---
-        System.out.println("\n🚆 TRENES DISPONIBLES:");
+        System.out.println("\nTRENES DISPONIBLES:");
         if (cityDatabase.hasTrainStation(origin) && cityDatabase.hasTrainStation(destination)) {
             List<Train> trains = searchTrains(origin, destination, startDate, endDate);
             if (trains.isEmpty()) System.out.println("   No se han encontrado trenes para estas fechas.");
@@ -269,7 +269,7 @@ public class TravelSearcher {
         }
 
         // --- BÚSQUEDA DE AUTOBUSES ---
-        System.out.println("\n🚌 AUTOBUSES DISPONIBLES:");
+        System.out.println("\nAUTOBUSES DISPONIBLES:");
         if (cityDatabase.hasBusStation(origin) && cityDatabase.hasBusStation(destination)) {
             List<Bus> buses = searchBuses(origin, destination, startDate, endDate);
             if (buses.isEmpty()) System.out.println("   No se han encontrado autobuses para estas fechas.");
@@ -327,7 +327,7 @@ public class TravelSearcher {
     // ==========================================================
 
     private void accommodationSearch(String city, String startDate, String endDate) {
-        System.out.println("\n🏨 ALOJAMIENTOS EN " + city.toUpperCase() + ":");
+        System.out.println("\nALOJAMIENTOS EN " + city.toUpperCase() + ":");
         
         // Buscar hoteles
         System.out.println("\n  HOTELES:");
@@ -402,7 +402,7 @@ public class TravelSearcher {
     // ==========================================================
 
     private void activitySearch(String city, String startDate, String endDate) {
-        System.out.println("\n🎭 ACTIVIDADES EN " + city.toUpperCase() + ":");
+        System.out.println("\nACTIVIDADES EN " + city.toUpperCase() + ":");
 
         // Buscar visitas guiadas
         System.out.println("\n  VISITAS GUIADAS:");
@@ -440,7 +440,7 @@ public class TravelSearcher {
 
     // Sobrecarga: búsqueda de actividades filtrando museos por temática
     private void activitySearch(String city, String startDate, String endDate, String museumTheme) {
-        System.out.println("\n🎭 ACTIVIDADES EN " + city.toUpperCase() + ":");
+        System.out.println("\nACTIVIDADES EN " + city.toUpperCase() + ":");
 
         // Buscar visitas guiadas
         System.out.println("\n  VISITAS GUIADAS:");
