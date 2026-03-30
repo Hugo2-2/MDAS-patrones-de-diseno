@@ -222,6 +222,26 @@ public class TravelSearcher {
         System.out.println("\n=========================================================");
     }
 
+    // Sobrecarga: búsqueda completa filtrando museos por temática
+    public void completeSearch(String origin, String destination, String startDate, String endDate, String museumTheme) {
+        System.out.println("=========================================================");
+        System.out.println(" BÚSQUEDA DE VIAJE: " + origin + " -> " + destination);
+        System.out.println(" Fechas: " + startDate + " al " + endDate);
+        System.out.println(" Temática de museos: " + museumTheme);
+        System.out.println("=========================================================\n");
+
+        if (!cityDatabase.cityExists(origin) || !cityDatabase.cityExists(destination)) {
+            System.out.println("⚠️ ADVERTENCIA: Una de las ciudades (o ambas) no están en nuestra base de datos.");
+            System.out.println("Intentaremos buscar de todos modos, pero los resultados pueden ser limitados.\n");
+        }
+
+        transportSearch(origin, destination, startDate, endDate);
+        accommodationSearch(destination, startDate, endDate);
+        activitySearch(destination, startDate, endDate, museumTheme);
+
+        System.out.println("\n=========================================================");
+    }
+
     // ==========================================================
     // MÉTODOS AGRUPADORES (Invocados internamente)
     // ==========================================================
@@ -418,6 +438,44 @@ public class TravelSearcher {
         }
     }
 
+    // Sobrecarga: búsqueda de actividades filtrando museos por temática
+    private void activitySearch(String city, String startDate, String endDate, String museumTheme) {
+        System.out.println("\n🎭 ACTIVIDADES EN " + city.toUpperCase() + ":");
+
+        // Buscar visitas guiadas
+        System.out.println("\n  VISITAS GUIADAS:");
+        List<GuidedTour> tours = findTours(city, startDate, endDate);
+        if (tours.isEmpty()) {
+            System.out.println("   No hay visitas guiadas disponibles para estas fechas.");
+        } else {
+            for (GuidedTour t : tours) {
+                System.out.println("   " + t.toString());
+            }
+        }
+
+        // Buscar festivales
+        System.out.println("\n  FESTIVALES:");
+        List<Festival> festivals = findFestivals(city, startDate, endDate);
+        if (festivals.isEmpty()) {
+            System.out.println("   No hay festivales disponibles para estas fechas.");
+        } else {
+            for (Festival f : festivals) {
+                System.out.println("   " + f.toString());
+            }
+        }
+
+        // Buscar museos filtrados por temática
+        System.out.println("\n  MUSEOS (temática: " + museumTheme + "):");
+        List<Museum> museums = findMuseums(city, startDate, endDate, museumTheme);
+        if (museums.isEmpty()) {
+            System.out.println("   No hay museos de esa temática disponibles para estas fechas.");
+        } else {
+            for (Museum m : museums) {
+                System.out.println("   " + m.toString());
+            }
+        }
+    }
+
     // ==========================================================
     // MÉTODOS PRIVADOS DE BÚSQUEDA DE ACTIVIDADES
     // ==========================================================
@@ -446,6 +504,17 @@ public class TravelSearcher {
         List<Museum> results = new ArrayList<>();
         for (Museum museum : availableMuseums) {
             if (museum.getCity().equalsIgnoreCase(city) && museum.isAvailable(startDate, endDate)) {
+                results.add(museum);
+            }
+        }
+        return results;
+    }
+
+    private List<Museum> findMuseums(String city, String startDate, String endDate, String theme) {
+        List<Museum> results = new ArrayList<>();
+        for (Museum museum : availableMuseums) {
+            if (museum.getCity().equalsIgnoreCase(city) && museum.isAvailable(startDate, endDate)
+                    && museum.getTheme().toLowerCase().contains(theme.toLowerCase())) {
                 results.add(museum);
             }
         }
