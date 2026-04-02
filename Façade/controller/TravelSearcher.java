@@ -171,6 +171,10 @@ public class TravelSearcher {
         // Roma
         availableFestivals.add(new Festival("Estate Romana", "Rome",
             "Festival de cine, música y teatro al aire libre", "2026-06-01", "2026-09-30", 15.00, "Cultural"));
+        
+        availableFestivals.add(new Festival( "Rome Summer Festival", "Rome", 
+            "Música internacional", "2026-05-01", "2026-05-20", 30.00, "Cultural"));
+
 
         // ==================== MUSEOS ====================
 
