@@ -7,191 +7,214 @@ import java.util.ArrayList;
 
 public class Main {
 
+    /** Precio estimado del kWh en euros. */
+    private static final double PRECIO_KWH = 0.15;
+
     // ---------------------------------------------------------------
-    // Utilidad: imprime el consumo de un Consumer con etiqueta
+    // Utilidades de impresión
     // ---------------------------------------------------------------
-    private static void printExpenses(String label, Consumer consumer) {
-        System.out.printf("  %-40s -> %.2f kWh%n", label, consumer.calcExpenses());
+    private static void printConsumo(String label, Consumer consumer) {
+        double kwh = consumer.calcExpenses();
+        System.out.printf("  %-50s -> %8.2f kWh  |  %6.2f €%n", label, kwh, kwh * PRECIO_KWH);
     }
 
+    private static void printSeparador(String titulo) {
+        System.out.println("\n══════════════════════════════════════════════════════════════════");
+        System.out.println(" " + titulo);
+        System.out.println("══════════════════════════════════════════════════════════════════");
+    }
+
+    // ---------------------------------------------------------------
+    // Programa principal
+    // ---------------------------------------------------------------
     public static void main(String[] args) {
 
-        System.out.println("╔══════════════════════════════════════════════════════════╗");
-        System.out.println("║        PATRÓN COMPOSITE – Gestión de Consumo Eléctrico  ║");
-        System.out.println("╚══════════════════════════════════════════════════════════╝");
+        System.out.println("╔════════════════════════════════════════════════════════════════╗");
+        System.out.println("║  PATRÓN COMPOSITE – Control de Gasto Energético Universitario ║");
+        System.out.println("╚════════════════════════════════════════════════════════════════╝");
+        System.out.printf("  (Precio del kWh utilizado: %.2f €)%n", PRECIO_KWH);
 
         // ================================================================
-        // CONFIGURACIÓN 1: Apartamento pequeño (1 planta, 2 habitaciones)
+        //  EDIFICIO 1 – Facultad de Informática
         // ================================================================
-        System.out.println("\n══════════════════════════════════════════════════════════");
-        System.out.println(" CONFIGURACIÓN 1: Apartamento pequeño");
-        System.out.println("══════════════════════════════════════════════════════════");
+        printSeparador("EDIFICIO 1: Facultad de Informática");
 
-        // — Dormitorio —
-        Device televisorDorm  = new Device(0.10, 3.0);   // 0.10 kWh/h, 3 h/día
-        Device lamparaDorm    = new Device(0.06, 5.0);   // bombilla LED 60W
-        Device ordenador      = new Device(0.30, 4.0);   // portátil
+        // — Sala de servidores —
+        Device servidor1      = new Device(0.50, 24.0);  // servidor rack
+        Device servidor2      = new Device(0.50, 24.0);
+        Device aireServidores = new Device(2.00, 24.0);  // climatización 24 h
+        Device switch1        = new Device(0.05, 24.0);  // switch de red
 
-        Space dormitorio = new Space(new ArrayList<>());
-        dormitorio.addConsumer(televisorDorm);
-        dormitorio.addConsumer(lamparaDorm);
-        dormitorio.addConsumer(ordenador);
+        Space salaServidores = new Space(new ArrayList<>());
+        salaServidores.addConsumer(servidor1);
+        salaServidores.addConsumer(servidor2);
+        salaServidores.addConsumer(aireServidores);
+        salaServidores.addConsumer(switch1);
 
-        // — Cocina —
-        Device frigorifico    = new Device(0.15, 24.0);  // siempre encendido
-        Device microondas     = new Device(1.20, 0.5);   // 30 min/día
-        Device lavadora       = new Device(2.00, 1.0);   // 1 h/día
+        // — Aula de prácticas (20 puestos) —
+        Space aulaPracticas = buildAula(20, true);
 
-        Space cocina = new Space(new ArrayList<>());
-        cocina.addConsumer(frigorifico);
-        cocina.addConsumer(microondas);
-        cocina.addConsumer(lavadora);
+        // — Aula teórica (proyector + iluminación) —
+        Device proyectorAula  = new Device(0.30, 6.0);
+        Device fluorescente1  = new Device(0.06, 8.0);
+        Device fluorescente2  = new Device(0.06, 8.0);
+        Device fluorescente3  = new Device(0.06, 8.0);
 
-        // — Apartamento = dormitorio + cocina —
-        Space apartamento = new Space(new ArrayList<>());
-        apartamento.addConsumer(dormitorio);
-        apartamento.addConsumer(cocina);
+        Space aulaTeoria = new Space(new ArrayList<>());
+        aulaTeoria.addConsumer(proyectorAula);
+        aulaTeoria.addConsumer(fluorescente1);
+        aulaTeoria.addConsumer(fluorescente2);
+        aulaTeoria.addConsumer(fluorescente3);
 
-        System.out.println("\n  [Dispositivos individuales]");
-        printExpenses("Televisor (dormitorio)",    televisorDorm);
-        printExpenses("Lámpara   (dormitorio)",    lamparaDorm);
-        printExpenses("Ordenador (dormitorio)",    ordenador);
-        printExpenses("Frigorífico (cocina)",      frigorifico);
-        printExpenses("Microondas  (cocina)",      microondas);
-        printExpenses("Lavadora    (cocina)",      lavadora);
+        // — Aparatos fuera de salas (pasillo) —
+        Device maquinaVending1   = new Device(0.40, 24.0);  // máquina de bebidas
+        Device maquinaCafe1      = new Device(1.50, 4.0);   // máquina de café
 
-        System.out.println("\n  [Espacios]");
-        printExpenses("Dormitorio",                dormitorio);
-        printExpenses("Cocina",                    cocina);
+        // — Edificio completo —
+        Space facultadInformatica = new Space(new ArrayList<>());
+        facultadInformatica.addConsumer(salaServidores);
+        facultadInformatica.addConsumer(aulaPracticas);
+        facultadInformatica.addConsumer(aulaTeoria);
+        // Aparatos fuera de las salas (pasillos del edificio)
+        facultadInformatica.addConsumer(maquinaVending1);
+        facultadInformatica.addConsumer(maquinaCafe1);
 
-        System.out.println("\n  [Total apartamento]");
-        printExpenses("Apartamento completo",      apartamento);
+        System.out.println("\n  [Dispositivos individuales – Sala de servidores]");
+        printConsumo("Servidor 1",               servidor1);
+        printConsumo("Servidor 2",               servidor2);
+        printConsumo("Aire acondicionado",       aireServidores);
+        printConsumo("Switch de red",            switch1);
 
-        // ================================================================
-        // CONFIGURACIÓN 2: Casa con dos plantas
-        // ================================================================
-        System.out.println("\n══════════════════════════════════════════════════════════");
-        System.out.println(" CONFIGURACIÓN 2: Casa unifamiliar (2 plantas)");
-        System.out.println("══════════════════════════════════════════════════════════");
+        System.out.println("\n  [Salas]");
+        printConsumo("Sala de servidores",       salaServidores);
+        printConsumo("Aula de prácticas (20 PC)",aulaPracticas);
+        printConsumo("Aula teórica",             aulaTeoria);
 
-        // — Planta baja —
-        Device tvSalon        = new Device(0.15, 4.0);
-        Device consola        = new Device(0.20, 2.0);
-        Device lampSalon      = new Device(0.10, 6.0);
-        Device horno          = new Device(2.00, 1.0);
-        Device lavavajillas   = new Device(1.80, 1.5);
+        System.out.println("\n  [Aparatos fuera de salas (pasillos)]");
+        printConsumo("Máquina de vending",       maquinaVending1);
+        printConsumo("Máquina de café",          maquinaCafe1);
 
-        Space salon = new Space(new ArrayList<>());
-        salon.addConsumer(tvSalon);
-        salon.addConsumer(consola);
-        salon.addConsumer(lampSalon);
-
-        Space cocinaPlantaBaja = new Space(new ArrayList<>());
-        cocinaPlantaBaja.addConsumer(new Device(0.15, 24.0)); // frigorífico
-        cocinaPlantaBaja.addConsumer(horno);
-        cocinaPlantaBaja.addConsumer(lavavajillas);
-
-        Space plantaBaja = new Space(new ArrayList<>());
-        plantaBaja.addConsumer(salon);
-        plantaBaja.addConsumer(cocinaPlantaBaja);
-
-        // — Primera planta —
-        Device lampDorm1      = new Device(0.06, 6.0);
-        Device lampDorm2      = new Device(0.06, 4.0);
-        Device aireAcond      = new Device(1.50, 3.0);   // aire acondicionado
-        Device cargadorMovil  = new Device(0.01, 8.0);
-
-        Space dormitorio1 = new Space(new ArrayList<>());
-        dormitorio1.addConsumer(lampDorm1);
-        dormitorio1.addConsumer(aireAcond);
-        dormitorio1.addConsumer(cargadorMovil);
-
-        Space dormitorio2 = new Space(new ArrayList<>());
-        dormitorio2.addConsumer(lampDorm2);
-        dormitorio2.addConsumer(new Device(0.10, 2.0)); // TV pequeña
-
-        Space primeraPlanta = new Space(new ArrayList<>());
-        primeraPlanta.addConsumer(dormitorio1);
-        primeraPlanta.addConsumer(dormitorio2);
-
-        // — Casa completa —
-        Space casaUnifamiliar = new Space(new ArrayList<>());
-        casaUnifamiliar.addConsumer(plantaBaja);
-        casaUnifamiliar.addConsumer(primeraPlanta);
-
-        System.out.println("\n  [Plantas]");
-        printExpenses("Planta baja",               plantaBaja);
-        printExpenses("Primera planta",            primeraPlanta);
-
-        System.out.println("\n  [Total casa unifamiliar]");
-        printExpenses("Casa unifamiliar completa", casaUnifamiliar);
+        System.out.println("\n  [Total edificio]");
+        printConsumo("Facultad de Informática",  facultadInformatica);
 
         // ================================================================
-        // CONFIGURACIÓN 3: Edificio de oficinas (3 plantas con despachos)
+        //  EDIFICIO 2 – Biblioteca Central
         // ================================================================
-        System.out.println("\n══════════════════════════════════════════════════════════");
-        System.out.println(" CONFIGURACIÓN 3: Edificio de oficinas (3 plantas)");
-        System.out.println("══════════════════════════════════════════════════════════");
+        printSeparador("EDIFICIO 2: Biblioteca Central");
 
-        // Planta 0 – Recepción + sala de reuniones
-        Space recepcion = buildOfficeRoom(3, 0.06, 8.0, 0.20, 8.0);  // 3 lámparas + PC recepción
-        Space salaReuniones = buildOfficeRoom(6, 0.06, 4.0, 0.10, 4.0);
+        // — Sala de lectura —
+        Space salaLectura = new Space(new ArrayList<>());
+        for (int i = 0; i < 10; i++) {
+            salaLectura.addConsumer(new Device(0.06, 12.0));  // 10 lámparas de mesa
+        }
+        salaLectura.addConsumer(new Device(1.50, 10.0));      // climatización
 
-        Space planta0 = new Space(new ArrayList<>());
-        planta0.addConsumer(recepcion);
-        planta0.addConsumer(salaReuniones);
-        planta0.addConsumer(new Device(0.50, 24.0)); // servidor pequeño
+        // — Sala de ordenadores (10 puestos) —
+        Space salaOrdenadores = buildAula(10, false);
 
-        // Planta 1 – Despachos
-        Space planta1 = buildOpenOffice(5);  // 5 puestos de trabajo
+        // — Aparatos fuera de salas —
+        Device maquinaVending2 = new Device(0.40, 24.0);
+        Device impresora       = new Device(0.50, 3.0);      // impresora autoservicio
 
-        // Planta 2 – Dirección
-        Space planta2 = buildOpenOffice(3);
-        planta2.addConsumer(new Device(2.00, 8.0)); // proyector
+        Space biblioteca = new Space(new ArrayList<>());
+        biblioteca.addConsumer(salaLectura);
+        biblioteca.addConsumer(salaOrdenadores);
+        biblioteca.addConsumer(maquinaVending2);
+        biblioteca.addConsumer(impresora);
 
-        Space edificioOficinas = new Space(new ArrayList<>());
-        edificioOficinas.addConsumer(planta0);
-        edificioOficinas.addConsumer(planta1);
-        edificioOficinas.addConsumer(planta2);
+        System.out.println("\n  [Salas]");
+        printConsumo("Sala de lectura",          salaLectura);
+        printConsumo("Sala de ordenadores (10)", salaOrdenadores);
 
-        System.out.println("\n  [Plantas del edificio]");
-        printExpenses("Planta 0 (Recepción/Reuniones)", planta0);
-        printExpenses("Planta 1 (Oficina abierta)",     planta1);
-        printExpenses("Planta 2 (Dirección)",           planta2);
+        System.out.println("\n  [Aparatos fuera de salas]");
+        printConsumo("Máquina de vending",       maquinaVending2);
+        printConsumo("Impresora autoservicio",   impresora);
 
-        System.out.println("\n  [Total edificio de oficinas]");
-        printExpenses("Edificio de oficinas completo",  edificioOficinas);
-
-        // ================================================================
-        // DEMOSTRACIÓN DINÁMICA: añadir y eliminar dispositivos
-        // ================================================================
-        System.out.println("\n══════════════════════════════════════════════════════════");
-        System.out.println(" DEMOSTRACIÓN DINÁMICA: modificación en tiempo de ejecución");
-        System.out.println("══════════════════════════════════════════════════════════");
-
-        System.out.printf("%n  Consumo del apartamento ANTES de añadir dispositivo: %.2f kWh%n",
-                apartamento.calcExpenses());
-
-        Device secador = new Device(2.00, 0.25); // secador de pelo, 15 min/día
-        dormitorio.addConsumer(secador);
-        System.out.printf("  → Se añade secador de pelo al dormitorio (2.0 kWh × 0.25 h)%n");
-        System.out.printf("  Consumo del apartamento DESPUÉS de añadir dispositivo: %.2f kWh%n",
-                apartamento.calcExpenses());
-
-        dormitorio.removeConsumer(secador);
-        System.out.printf("  → Se elimina el secador%n");
-        System.out.printf("  Consumo del apartamento TRAS eliminar dispositivo:    %.2f kWh%n",
-                apartamento.calcExpenses());
+        System.out.println("\n  [Total edificio]");
+        printConsumo("Biblioteca Central",       biblioteca);
 
         // ================================================================
-        // COMPARATIVA FINAL
+        //  EDIFICIO 3 – Aulario General
         // ================================================================
-        System.out.println("\n══════════════════════════════════════════════════════════");
-        System.out.println(" COMPARATIVA DE CONFIGURACIONES (consumo diario estimado)");
-        System.out.println("══════════════════════════════════════════════════════════\n");
-        printExpenses("Apartamento pequeño",           apartamento);
-        printExpenses("Casa unifamiliar",              casaUnifamiliar);
-        printExpenses("Edificio de oficinas",          edificioOficinas);
+        printSeparador("EDIFICIO 3: Aulario General");
+
+        // 4 aulas teóricas grandes
+        Space aula1 = buildAulaTeoria(6, 8.0);
+        Space aula2 = buildAulaTeoria(6, 8.0);
+        Space aula3 = buildAulaTeoria(4, 6.0);
+        Space aula4 = buildAulaTeoria(4, 6.0);
+
+        // Aparato fuera de salas
+        Device maquinaSnacks = new Device(0.35, 24.0);
+
+        Space aulario = new Space(new ArrayList<>());
+        aulario.addConsumer(aula1);
+        aulario.addConsumer(aula2);
+        aulario.addConsumer(aula3);
+        aulario.addConsumer(aula4);
+        aulario.addConsumer(maquinaSnacks);
+
+        System.out.println("\n  [Aulas]");
+        printConsumo("Aula 1 (6 fluor., 8 h)",  aula1);
+        printConsumo("Aula 2 (6 fluor., 8 h)",  aula2);
+        printConsumo("Aula 3 (4 fluor., 6 h)",  aula3);
+        printConsumo("Aula 4 (4 fluor., 6 h)",  aula4);
+
+        System.out.println("\n  [Aparatos fuera de salas]");
+        printConsumo("Máquina de snacks",        maquinaSnacks);
+
+        System.out.println("\n  [Total edificio]");
+        printConsumo("Aulario General",          aulario);
+
+        // ================================================================
+        //  CAMPUS COMPLETO
+        // ================================================================
+        printSeparador("CAMPUS UNIVERSITARIO COMPLETO");
+
+        Space campus = new Space(new ArrayList<>());
+        campus.addConsumer(facultadInformatica);
+        campus.addConsumer(biblioteca);
+        campus.addConsumer(aulario);
+
+        System.out.println("\n  [Resumen por edificio]");
+        printConsumo("Facultad de Informática",  facultadInformatica);
+        printConsumo("Biblioteca Central",       biblioteca);
+        printConsumo("Aulario General",          aulario);
+
+        System.out.println("\n  [Total campus]");
+        printConsumo("CAMPUS COMPLETO",          campus);
+
+        // ================================================================
+        //  DEMOSTRACIÓN DINÁMICA: añadir / eliminar aparatos
+        // ================================================================
+        printSeparador("DEMOSTRACIÓN DINÁMICA: modificación en tiempo de ejecución");
+
+        System.out.printf("%n  Consumo del campus ANTES del cambio: %.2f kWh (%.2f €)%n",
+                campus.calcExpenses(), campus.calcExpenses() * PRECIO_KWH);
+
+        // Se instala un nuevo proyector en el Aula 1 del aulario
+        Device nuevoProyector = new Device(0.30, 6.0);
+        aula1.addConsumer(nuevoProyector);
+        System.out.println("  → Se instala un proyector en el Aula 1 (0.30 kWh × 6 h)");
+        System.out.printf("  Consumo del campus DESPUÉS de instalar proyector: %.2f kWh (%.2f €)%n",
+                campus.calcExpenses(), campus.calcExpenses() * PRECIO_KWH);
+
+        // Se retira el proyector
+        aula1.removeConsumer(nuevoProyector);
+        System.out.println("  → Se retira el proyector del Aula 1");
+        System.out.printf("  Consumo del campus TRAS retirar proyector:        %.2f kWh (%.2f €)%n",
+                campus.calcExpenses(), campus.calcExpenses() * PRECIO_KWH);
+
+        // ================================================================
+        //  COMPARATIVA FINAL
+        // ================================================================
+        printSeparador("COMPARATIVA DE EDIFICIOS (consumo diario estimado)");
+        System.out.println();
+        printConsumo("Facultad de Informática",  facultadInformatica);
+        printConsumo("Biblioteca Central",       biblioteca);
+        printConsumo("Aulario General",          aulario);
+        System.out.println("  ──────────────────────────────────────────────────────────────");
+        printConsumo("TOTAL CAMPUS",             campus);
         System.out.println();
     }
 
@@ -200,32 +223,38 @@ public class Main {
     // ---------------------------------------------------------------
 
     /**
-     * Crea un despacho/sala con N lámparas y un PC por puesto.
+     * Crea un aula de prácticas con N puestos (PC + monitor + lámpara)
+     * y opcionalmente un proyector.
      */
-    private static Space buildOfficeRoom(int lamps,
-                                         double lampConsumption, double lampHours,
-                                         double pcConsumption,   double pcHours) {
-        Space room = new Space(new ArrayList<>());
-        for (int i = 0; i < lamps; i++) {
-            room.addConsumer(new Device(lampConsumption, lampHours));
+    private static Space buildAula(int puestos, boolean conProyector) {
+        Space aula = new Space(new ArrayList<>());
+        for (int i = 0; i < puestos; i++) {
+            Space puesto = new Space(new ArrayList<>());
+            puesto.addConsumer(new Device(0.20, 6.0));  // PC sobremesa
+            puesto.addConsumer(new Device(0.03, 6.0));  // monitor
+            aula.addConsumer(puesto);
         }
-        room.addConsumer(new Device(pcConsumption, pcHours));
-        return room;
+        // Iluminación general
+        for (int i = 0; i < 4; i++) {
+            aula.addConsumer(new Device(0.06, 8.0));    // fluorescente
+        }
+        if (conProyector) {
+            aula.addConsumer(new Device(0.30, 6.0));    // proyector
+        }
+        return aula;
     }
 
     /**
-     * Crea una planta de oficina abierta con N puestos de trabajo
-     * (cada puesto: 1 PC + 1 monitor + 1 lámpara).
+     * Crea un aula teórica con N fluorescentes, un proyector
+     * y climatización.
      */
-    private static Space buildOpenOffice(int workstations) {
-        Space floor = new Space(new ArrayList<>());
-        for (int i = 0; i < workstations; i++) {
-            Space workstation = new Space(new ArrayList<>());
-            workstation.addConsumer(new Device(0.20, 8.0));  // PC de sobremesa
-            workstation.addConsumer(new Device(0.03, 8.0));  // monitor
-            workstation.addConsumer(new Device(0.06, 8.0));  // lámpara de escritorio
-            floor.addConsumer(workstation);
+    private static Space buildAulaTeoria(int fluorescentes, double horas) {
+        Space aula = new Space(new ArrayList<>());
+        for (int i = 0; i < fluorescentes; i++) {
+            aula.addConsumer(new Device(0.06, horas));  // fluorescente
         }
-        return floor;
+        aula.addConsumer(new Device(0.30, horas));      // proyector
+        aula.addConsumer(new Device(1.20, horas));       // climatización
+        return aula;
     }
 }
