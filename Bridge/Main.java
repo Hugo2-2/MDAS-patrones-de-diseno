@@ -120,25 +120,6 @@ public class Main {
         List<Product> supplierBSofas = supplierB.searchBySeats(2);
         System.out.println("      Returns: " + supplierBSofas.size() + " products (empty list)");
 
-        // 7. CAMBIO DINÁMICO DE IMPLEMENTACIÓN
-        System.out.println("\n7. DYNAMIC IMPLEMENTATION SWITCHING:");
-        
-        System.out.println("\n   Original SofaFinder (all suppliers): " + 
-                          sofaFinder.searchFurniture("seats").size() + " products");
-        
-        // Crear nuevo finder con un subconjunto de proveedores
-        System.out.println("\n   Creating new SofaFinder with only Supplier A:");
-        FurnitureFinder limitedSofaFinder = new SofaFinder(Arrays.asList(supplierA), 2);
-        System.out.println("   New finder results: " + 
-                          limitedSofaFinder.searchFurniture("seats").size() + " products");
-
-        // 8. VERIFICAR CONFIGURACIÓN DEL ENUNCIADO
-        System.out.println("\n8. CONFIGURATION VERIFICATION:");
-        System.out.println("   All finders query EVERY supplier regardless of what they sell");
-        System.out.println("   Suppliers are responsible for filtering their own products");
-        System.out.println("   Supplier A returns empty list for table searches");
-        System.out.println("   Supplier B returns empty list for sofa searches");
-        System.out.println("   Supplier C returns both types appropriately");
     }
     
     /**

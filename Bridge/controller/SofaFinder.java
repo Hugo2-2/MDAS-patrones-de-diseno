@@ -5,12 +5,7 @@ import Bridge.model.Product;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * ABSTRACCIÓN REFINADA (Bridge) — Búsqueda de sofás.
- *
- * Especializa FurnitureFinder para buscar sofás según el número de asientos.
- * Recorre todos los proveedores (suppliers) y agrega los resultados.
- */
+
 public class SofaFinder extends FurnitureFinder {
 
     private int seats;
