@@ -39,7 +39,7 @@ public class Main {
         File copiaFile1 = copiarArchivo(file1, "Cap1_reunificado.txt");
         if (copiaFile1 == null) return;
 
-        System.out.println("▶ Uniendo:");
+        System.out.println("Uniendo:");
         System.out.println("    · " + file1.getName() + "  (mitad superior)");
         System.out.println("    · " + file2.getName() + "  (mitad inferior)");
 
@@ -48,7 +48,7 @@ public class Main {
         System.out.println("\n--- Primeras 10 líneas del archivo resultante ---");
         imprimirPrimerasLineas(copiaFile1, 10);
         System.out.println("...");
-        System.out.printf("%n✅ Archivo generado: %s%n%n", copiaFile1.getName());
+        System.out.printf("%nArchivo generado: %s%n%n", copiaFile1.getName());
     }
 
     // =========================================================
@@ -72,7 +72,7 @@ public class Main {
         parrafos2.add(new Paragraph(1,  5));   // Líneas  1-5  del Cap2
         parrafos2.add(new Paragraph(11, 15));  // Líneas 11-15 del Cap2
 
-        System.out.println("▶ Combinando párrafos de:");
+        System.out.println("Combinando párrafos de:");
         System.out.println("    · " + file1.getName() + "  → líneas [1-5] y [11-15]");
         System.out.println("    · " + file2.getName() + "  → líneas [1-5] y [11-15]");
 
@@ -80,7 +80,7 @@ public class Main {
 
         System.out.println("\n--- Contenido del archivo combinado ---");
         imprimirTodasLasLineas(fileCombinado);
-        System.out.printf("%n✅ Archivo generado: %s%n%n", fileCombinado.getName());
+        System.out.printf("%nArchivo generado: %s%n%n", fileCombinado.getName());
     }
 
     // =========================================================
@@ -108,7 +108,7 @@ public class Main {
         puntosDivision.add(5);  // corte en línea 5 del archivo actual
         puntosDivision.add(5);  // corte en línea 5 del segmento restante (línea 10 del original)
 
-        System.out.println("▶ Dividiendo '" + file.getName() + "'");
+        System.out.println("Dividiendo '" + file.getName() + "'");
         System.out.println("    Puntos de corte (aplicados sobre el segmento restante): " + puntosDivision);
 
         Vector<File> partes = maquetador.splitFiles(copiaFile, puntosDivision);
@@ -121,7 +121,7 @@ public class Main {
             System.out.println();
         }
 
-        System.out.printf("✅ %d archivos generados.%n%n", partes.size());
+        System.out.printf("%d archivos generados.%n%n", partes.size());
     }
 
     // =========================================================
@@ -135,7 +135,7 @@ public class Main {
             Files.copy(origen.toPath(), destino.toPath(), StandardCopyOption.REPLACE_EXISTING);
             return destino;
         } catch (IOException e) {
-            System.err.println("❌ Error al crear la copia temporal: " + e.getMessage());
+            System.err.println("Error al crear la copia temporal: " + e.getMessage());
             return null;
         }
     }
@@ -144,7 +144,7 @@ public class Main {
     private static boolean checkFiles(File... archivos) {
         for (File f : archivos) {
             if (!f.exists()) {
-                System.out.println("❌ Archivo no encontrado: " + f.getAbsolutePath());
+                System.out.println("Archivo no encontrado: " + f.getAbsolutePath());
                 return false;
             }
         }
@@ -161,7 +161,7 @@ public class Main {
                 contador++;
             }
         } catch (IOException e) {
-            System.err.println("❌ Error al leer el archivo: " + e.getMessage());
+            System.err.println("Error al leer el archivo: " + e.getMessage());
         }
     }
 
@@ -173,7 +173,7 @@ public class Main {
                 System.out.println(linea);
             }
         } catch (IOException e) {
-            System.err.println("❌ Error al leer el archivo: " + e.getMessage());
+            System.err.println("Error al leer el archivo: " + e.getMessage());
         }
     }
 

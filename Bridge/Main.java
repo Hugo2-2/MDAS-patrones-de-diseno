@@ -25,9 +25,9 @@ public class Main {
         FurnitureSupplier supplierB = new SupplierB(); // Solo mesas
         FurnitureSupplier supplierC = new SupplierC(); // Mixto (mesas y sofás)
 
-        System.out.println("   ✓ Supplier A (only sofas)");
-        System.out.println("   ✓ Supplier B (only tables)");
-        System.out.println("   ✓ Supplier C (sofas & tables)");
+        System.out.println("   Supplier A (only sofas)");
+        System.out.println("   Supplier B (only tables)");
+        System.out.println("   Supplier C (sofas & tables)");
 
         // 2. Configurar los FINDERS (Abstracciones) con TODOS los proveedores
         System.out.println("\n2. CONFIGURING FINDERS WITH ALL SUPPLIERS:");
@@ -39,9 +39,9 @@ public class Main {
         FurnitureFinder tableFinder = new TableFinder(allSuppliers, "medium");
         FurnitureFinder sofaFinder = new SofaFinder(allSuppliers, 2);
         
-        System.out.println("   ✓ TableFinder created with ALL suppliers (A, B, C)");
-        System.out.println("   ✓ SofaFinder created with ALL suppliers (A, B, C)");
-        System.out.println("   ✓ Each supplier will return empty list for products they don't sell");
+        System.out.println("   TableFinder created with ALL suppliers (A, B, C)");
+        System.out.println("   SofaFinder created with ALL suppliers (A, B, C)");
+        System.out.println("   Each supplier will return empty list for products they don't sell");
 
         // 3. DEMOSTRACIÓN: Verificar que se consultan TODOS los proveedores
         System.out.println("\n3. VERIFYING ALL SUPPLIERS ARE QUERIED:");
@@ -136,9 +136,9 @@ public class Main {
         System.out.println("\n8. CONFIGURATION VERIFICATION:");
         System.out.println("   All finders query EVERY supplier regardless of what they sell");
         System.out.println("   Suppliers are responsible for filtering their own products");
-        System.out.println("   ✓ Supplier A returns empty list for table searches");
-        System.out.println("   ✓ Supplier B returns empty list for sofa searches");
-        System.out.println("   ✓ Supplier C returns both types appropriately");
+        System.out.println("   Supplier A returns empty list for table searches");
+        System.out.println("   Supplier B returns empty list for sofa searches");
+        System.out.println("   Supplier C returns both types appropriately");
     }
     
     /**

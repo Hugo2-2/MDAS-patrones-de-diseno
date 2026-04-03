@@ -26,18 +26,18 @@ public class CityInfo {
     
     public List<String> getAvailableTransportTypes() {
         List<String> types = new ArrayList<>();
-        if (hasAirport) types.add("✈️ FLIGHT");
-        if (hasTrainStation) types.add("🚆 TRAIN");
-        if (hasBusStation) types.add("🚌 BUS");
+        if (hasAirport) types.add("FLIGHT");
+        if (hasTrainStation) types.add("TRAIN");
+        if (hasBusStation) types.add("BUS");
         return types;
     }
     
     @Override
     public String toString() {
-        return String.format("%s (%s) | ✈️:%s 🚆:%s 🚌:%s", 
+        return String.format("%s (%s) | FLIGHT:%s TRAIN:%s BUS:%s", 
             name, country, 
-            hasAirport ? "✓" : "✗",
-            hasTrainStation ? "✓" : "✗",
-            hasBusStation ? "✓" : "✗");
+            hasAirport ? "Yes" : "No",
+            hasTrainStation ? "Yes" : "No",
+            hasBusStation ? "Yes" : "No");
     }
 }

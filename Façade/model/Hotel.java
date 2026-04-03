@@ -41,7 +41,7 @@ public class Hotel {
     
     @Override
     public String toString() {
-        return String.format("[%s] %s | %s | %s | %s★ | %.2f€/night | Available: %s - %s", 
+        return String.format("[%s] %s | %s | %s | %s* | %.2f€/night | Available: %s - %s", 
                 getName(), getAddress(), getCity(), getRoomType(), getStars(), getPricePerNight(), getAvailableFrom(), getAvailableTo());
     }
 }
