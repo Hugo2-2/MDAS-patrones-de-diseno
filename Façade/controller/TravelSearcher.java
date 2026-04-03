@@ -52,6 +52,7 @@ public class TravelSearcher {
         // Cargar datos de prueba
         loadTransportData();
         loadAccommodationData();
+        loadActivitiesData();
         }
 
     private void loadTransportData() {

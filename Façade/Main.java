@@ -5,7 +5,7 @@ import Façade.controller.TravelSearcher;
 public class Main {
     public static void main(String[] args) {
         System.out.println("╔═══════════════════════════════════════════════════════╗");
-        System.out.println("║          PATRÓN FAÇADE - BUSCADOR DE VIAJES          ║");
+        System.out.println("║          PATRÓN FAÇADE - BUSCADOR DE VIAJES           ║");
         System.out.println("╚═══════════════════════════════════════════════════════╝\n");
 
         // El cliente solo necesita conocer la FACHADA (TravelSearcher).
