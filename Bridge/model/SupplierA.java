@@ -1,6 +1,5 @@
 package Bridge.model;
 import Bridge.controller.FurnitureSupplier;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -12,8 +11,8 @@ public class SupplierA implements FurnitureSupplier {
     public SupplierA() {
         this.inventory = new ArrayList<>();
         // Empresa A solo vende sofás
-        inventory.add(new Product("Sofa de Cuero", 499.99, ProductType.SOFA, 5));
-        inventory.add(new Product("Sofa Minimalista", 299.50, ProductType.SOFA, 12));
+        inventory.add(new Product("Sofa de Cuero", 499.99, ProductType.SOFA, 5, "Supplier A"));
+        inventory.add(new Product("Sofa Minimalista", 299.50, ProductType.SOFA, 12, "Supplier A"));
     }
 
     @Override

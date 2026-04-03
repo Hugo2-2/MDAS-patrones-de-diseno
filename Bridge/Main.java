@@ -4,16 +4,15 @@ import Bridge.controller.FurnitureFinder;
 import Bridge.controller.FurnitureSupplier;
 import Bridge.controller.SofaFinder;
 import Bridge.controller.TableFinder;
+import Bridge.model.Product;
+import Bridge.model.ProductType;
 import Bridge.model.SupplierA;
 import Bridge.model.SupplierB;
 import Bridge.model.SupplierC;
-import Bridge.model.Product;
-import Bridge.model.ProductType;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Comparator;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -140,7 +139,7 @@ public class Main {
             }
             if (!found) {
                 // Crear copia para no modificar el original
-                Product copy = new Product(p.getName(), p.getPrice(), p.getType(), p.getStock());
+                Product copy = new Product(p.getName(), p.getPrice(), p.getType(), p.getStock(), p.getSupplier());
                 result.add(copy);
             }
         }

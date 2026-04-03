@@ -6,19 +6,22 @@ public class Product {
     private double price;
     private ProductType type;
     private int stock;
+    private String supplier;
 
-    public Product(String name, double price, ProductType type) {
+    public Product(String name, double price, ProductType type, String supplier) {
         this.name = name;
         this.price = price;
         this.type = type;
         this.stock = 0;
+        this.supplier = supplier;
     }
 
-    public Product(String name, double price, ProductType type, int stock) {
+    public Product(String name, double price, ProductType type, int stock, String supplier) {
         this.name = name;
         this.price = price;
         this.type = type;
         this.stock = stock;
+        this.supplier = supplier;
     }
 
     public String getName() {
@@ -53,8 +56,16 @@ public class Product {
         this.stock = stock;
     }
 
+    public String getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
+    }
+
     @Override
     public String toString() {
-        return String.format("%s [%s] - %.2f €", name, type, price);
+        return String.format("%s [%s] - %.2f € (Supplier: %s)", name, type, price, supplier);
     }
 }
