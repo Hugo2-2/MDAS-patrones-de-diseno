@@ -30,7 +30,7 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println("╔════════════════════════════════════════════════════════════════╗");
-        System.out.println("║  PATRÓN COMPOSITE – Control de Gasto Energético Universitario ║");
+        System.out.println("║  PATRÓN COMPOSITE – Control de Gasto Energético Universitario  ║");
         System.out.println("╚════════════════════════════════════════════════════════════════╝");
         System.out.printf("  (Precio del kWh utilizado: %.2f €)%n", PRECIO_KWH);
 
